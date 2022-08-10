@@ -7,6 +7,7 @@ public class Movimiento : MonoBehaviour
     // Start is called before the first frame update
     Vector3 direction;
     public float speed = 2f;
+    public float cameraAxis = 0f;
     void Start()
     {
         
@@ -19,6 +20,7 @@ public class Movimiento : MonoBehaviour
     }
     void movimiento()
     {
+        RotatePlayer();
         direction = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
         {
@@ -42,5 +44,10 @@ public class Movimiento : MonoBehaviour
     private void MovePlayer(Vector3 direction)
     {
         transform.Translate(direction * speed * Time.deltaTime);
+    }
+    public void RotatePlayer()
+    {
+        cameraAxis += Input.GetAxis("Mouse X");
+        transform.rotation = Quaternion.Euler(0, cameraAxis * 2f, 0);
     }
 }
